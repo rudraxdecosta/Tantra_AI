@@ -1,142 +1,120 @@
-# Tantra AI 
+# Tantra
 
-> **Personal AI Teaching & Examination-Preparation Platform for College Students**
+A web-based learning and exam preparation platform designed for college students. It provides conversational explanations in Hinglish, step-by-step concept breakdowns from fundamentals, ASCII diagrams, and structured notes for university examinations.
 
-Tantra is an intelligent, adaptive educational assistant designed specifically for university students (B.Tech Semester 1 foundation courses including Mathematics, Chemistry, Engineering Graphics, EVS, Mechanics, Workshop, ECE, and Labs — extensible to any branch/semester). 
+Primary focus: B.Tech Semester 1 subjects (Engineering Graphics, Mechanics, Chemistry, Mathematics, ECE, EVS, and Labs), extensible to other coursework.
 
-It breaks down complex academic syllabus into simple, conversational **Hinglish** explanations from absolute zero, accompanied by ASCII/SVG diagrams, exam-oriented notes, and practice problems.
+## Features
 
----
+- Concept explanations from absolute zero using simple language and practical analogies.
+- Visual schematics and text diagrams for mechanical and circuit concepts.
+- Material uploads supporting PDFs, PPTs, and images for targeted doubt-solving.
+- Exam-oriented formats including 2-mark, 5-mark, and 10-mark structured answers.
+- Study planner based on available student study hours.
+- Quick navigation shortcuts: NEXT, REVISE, TEST ME, EXPLAIN AGAIN, SHORT NOTES, NUMERICALS, and IMPORTANT QUESTIONS.
 
-## 🌟 Key Features
+## Tech Stack
 
-- **Teach From Zero**: Explains fundamental intuition, everyday analogies, and physical meaning before introducing formulas or technical jargon.
-- **Adaptive Difficulty Engine (Levels 1–5)**:
-  - **Level 1**: Absolute Beginner (Intuition & simple analogies)
-  - **Level 2**: Basic (Formal definitions, terminology & basic formulas)
-  - **Level 3**: University Standard (Complete syllabus-level derivations & exam questions)
-  - **Level 4**: Advanced Application (Multi-step numericals & complex proofs)
-  - **Level 5**: Expert Mastery (Theoretical relationships & independent problem solving)
-- **Multi-Modal Material Upload**: Attach PPTs, PDFs, lecture notes, textbook pages, or lab manual photos (up to 15MB) for targeted step-by-step tutoring.
-- **Visual Learning & Diagrams**: Labelled ASCII schematics and companion visual maps for mechanical systems, circuits, and technical graphics.
-- **Exam Preparation Mode**:
-  - Concise 2-mark definitions
-  - Structured 5-mark & 10-mark long answers
-  - University difference tables
-  - Step-by-step numerical calculations & MCQs
-- **Interactive Study Planner**: Generates realistic time-bound study roadmaps based on available study hours.
-- **Quick Study Commands**: One-click actions for `NEXT`, `REVISE`, `TEST ME`, `EXPLAIN AGAIN`, `SHORT NOTES`, `NUMERICALS`, and `IMPORTANT QUESTIONS`.
+- Frontend: React 18, TypeScript, Vite, Tailwind CSS, Lucide React
+- Backend: Supabase Edge Functions (Deno)
+- Database & Auth: Supabase (PostgreSQL with Row Level Security)
+- LLM Provider: Google Gemini API (called securely server-side)
 
----
-
-## 🛠️ Technology Stack
-
-- **Frontend**: React 18, TypeScript, Vite, Tailwind CSS, Lucide Icons
-- **Backend / Serverless**: Supabase Edge Functions (Deno Runtime)
-- **Database & Auth**: Supabase PostgreSQL, Row Level Security (RLS), Supabase Auth
-- **AI Core**: Google Gemini API via server-side Edge Functions
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── src/
 │   ├── components/
-│   │   ├── TeacherChat.tsx     # Main conversational classroom interface
-│   │   ├── StudyDashboard.tsx  # Course modules, roadmap & progress
-│   │   ├── AuthPanel.tsx       # Student registration & login
-│   │   └── AdminPortal.tsx     # Administration & moderation controls
+│   │   ├── TeacherChat.tsx     # Chat interface
+│   │   ├── StudyDashboard.tsx  # Course modules and progress
+│   │   ├── AuthPanel.tsx       # Authentication
+│   │   └── AdminPortal.tsx     # Admin panel
 │   ├── lib/
-│   │   ├── teacher.ts          # API client for teacher Edge Function & chat persistence
-│   │   ├── study.ts            # Course intelligence & progress tracking
-│   │   ├── access.ts           # Access control & admin verification
-│   │   └── supabase.ts         # Supabase client initialization
-│   ├── App.tsx                 # Root application controller
-│   └── index.css               # Modern dark-mode styling & aura animations
+│   │   ├── teacher.ts          # Edge function API calls and message handling
+│   │   ├── study.ts            # Course intelligence utilities
+│   │   ├── access.ts           # Role-based access logic
+│   │   └── supabase.ts         # Supabase client setup
+│   ├── App.tsx                 # Root component
+│   └── index.css               # Styling
 ├── supabase/
 │   ├── functions/
-│   │   ├── teacher/            # Teacher AI Edge Function
-│   │   └── _shared/            # Shared HTTP & CORS helpers
-│   └── migrations/             # SQL schemas, RLS policies, & service secrets
+│   │   ├── teacher/            # Edge function calling Gemini API
+│   │   └── _shared/            # Shared HTTP and CORS headers
+│   └── migrations/             # Database schema migrations
 ├── package.json
+├── vercel.json
 └── vite.config.ts
 ```
 
----
-
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
+- Node.js 18+
 - npm or pnpm
-- A free [Supabase](https://supabase.com) project
-- A [Google AI Studio](https://aistudio.google.com) API Key (Gemini)
+- A Supabase account and project
+- A Google Gemini API key
 
-### 1. Clone the repository
+### Installation
 
-```bash
-git clone https://github.com/<your-username>/tantra-ai.git
-cd tantra-ai
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/rudraxdecosta/Tantra_AI.git
+   cd Tantra_AI
+   ```
 
-### 2. Install dependencies
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-```bash
-npm install
-```
+3. Set up environment variables:
+   Copy `.env.example` to `.env` and fill in your Supabase credentials:
+   ```bash
+   cp .env.example .env
+   ```
 
-### 3. Environment Configuration
+   ```env
+   VITE_SUPABASE_URL=https://<your-project-id>.supabase.co
+   VITE_SUPABASE_ANON_KEY=<your-supabase-anon-key>
+   ```
 
-Create a `.env` file in the root directory:
+### Database & Backend Setup
 
-```env
-VITE_SUPABASE_URL=https://your-project-id.supabase.co
-VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
-```
+1. Run the database migrations in `supabase/migrations/` using the Supabase CLI or SQL Editor in the dashboard:
+   ```bash
+   npx supabase db push --remote=<your-project-id>
+   ```
 
-### 4. Supabase Database & Edge Functions Setup
-
-1. In your Supabase project's **SQL Editor**, run the database migrations located in `supabase/migrations/` to set up tables (`chat_messages`, `tantra_service_secrets`, etc.).
-2. Insert your Google Gemini API key into `tantra_service_secrets`:
+2. Save your Gemini API key in the server-side secrets table:
    ```sql
    INSERT INTO tantra_service_secrets (name, value)
-   VALUES ('GEMINI_API_KEY', 'YOUR_GEMINI_API_KEY')
+   VALUES ('GEMINI_API_KEY', '<your-gemini-api-key>')
    ON CONFLICT (name) DO UPDATE SET value = EXCLUDED.value;
    ```
-3. Deploy the Edge Function using Supabase CLI:
+
+3. Deploy the Edge Function:
    ```bash
-   npx supabase functions deploy teacher --remote=YOUR_PROJECT_REF
+   npx supabase functions deploy teacher --remote=<your-project-id>
    ```
 
-### 5. Run Development Server
+### Running Locally
 
+Start the local development server:
 ```bash
 npm run dev
 ```
 
-The application will be live at `http://localhost:5173`.
-
----
-
-## 📦 Production Build
-
-To build the optimized production assets:
-
+Build for production:
 ```bash
 npm run build
 ```
 
-Preview the build locally:
-
+Preview production build:
 ```bash
 npm run preview
 ```
 
----
+## Deployment
 
-## 🔒 Security & Privacy
-
-- All third-party AI keys are stored server-side in protected database vaults with Row Level Security (RLS) enabled and zero client access.
-- User authentication and data isolation are strictly enforced through Supabase RLS policies.
+The project is configured for deployment on Vercel. `vercel.json` includes client-side routing rewrites. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in your Vercel project environment variables before building.
