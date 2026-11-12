@@ -1,0 +1,1 @@
+functions.teacher = { verify_jwt = true }
