@@ -1,4 +1,4 @@
-# Tantra AI (Adi ka Tantra)
+# Tantra AI 
 
 > **Personal AI Teaching & Examination-Preparation Platform for College Students**
 
