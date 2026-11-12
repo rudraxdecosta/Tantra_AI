@@ -1,5 +1,7 @@
 # Tantra
 
+Live Demo: https://tantra-ai-e1eg.vercel.app
+
 A web-based learning and exam preparation platform designed for college students. It provides conversational explanations in Hinglish, step-by-step concept breakdowns from fundamentals, ASCII diagrams, and structured notes for university examinations.
 
 Primary focus: B.Tech Semester 1 subjects (Engineering Graphics, Mechanics, Chemistry, Mathematics, ECE, EVS, and Labs), extensible to other coursework.
